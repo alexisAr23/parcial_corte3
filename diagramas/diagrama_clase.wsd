@@ -1,0 +1,46 @@
+@startuml
+class Cliente {
+  String : tipoDocumento
+  String : documento
+  String : nombre
+  String : correo
+}
+
+class FacturaCliente {
+  String : numeroFactura
+  Date : fecha
+  Cliente  :cliente
+}
+
+class DetalleFactura {
+  int  : cantidad
+  float  : valorBruto
+  float  : valorNeto
+  float : valorDescuento
+  float : valorTotal
+  FacturaCliente  : factura
+  Producto : producto
+}
+
+class Producto {
+  String : codigo
+  String : nombre
+  String : descripcion
+  String : categoria
+  float : valor
+}
+
+class Inventario {
+  String : codigo
+  Date : fechaIngreso
+  float : valorDescuento
+  float : porcentajeIVA
+  Date : fechaSalida
+  Producto : producto
+}
+
+Cliente "1" <-- "0..*" FacturaCliente
+FacturaCliente "1" <-- "1" DetalleFactura
+Producto "1" <-- "0*" DetalleFactura
+Producto "1" -->  Inventario
+@enduml
